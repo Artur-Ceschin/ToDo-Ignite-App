@@ -1,0 +1,11 @@
+.completedTasksStyles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.completedTasksStyles h3 {
+  color: var(--purple);
+  font-size: 14px;
+}

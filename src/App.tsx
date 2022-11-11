@@ -1,3 +1,5 @@
+import { ToDoApp } from 'src/pages/toDoApp';
+
 export function App() {
-  return <div>Todo</div>;
+  return <ToDoApp />;
 }

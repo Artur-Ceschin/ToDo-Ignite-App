@@ -1,0 +1,10 @@
+.numberBackground {
+  display: flex;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 999px;
+  height: 19px;
+  padding: 2px 8px;
+  font-size: 12px;
+  background-color: var(--gray-400);
+}

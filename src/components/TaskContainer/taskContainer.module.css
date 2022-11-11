@@ -1,0 +1,17 @@
+.tasksContainer {
+  font-size: 14px;
+  margin-top: 4rem;
+}
+
+.containerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+}
+
+.headerSeparator {
+  width: 100%;
+  border: 1px solid gray;
+  opacity: 0.4;
+}
