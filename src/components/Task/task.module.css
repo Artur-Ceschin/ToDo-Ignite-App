@@ -1,0 +1,36 @@
+.taskStyle {
+  background-color: var(--gray-500);
+  border-radius: 8px;
+  padding: 22px 16px;
+  margin: 14px 0;
+
+  display: flex;
+  text-align: justify;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.taskStyle p {
+  margin: 0.2rem 1rem;
+}
+
+.textContainer {
+  width: 100%;
+}
+
+.taskStyleCompleted {
+  margin-right: 1.5rem;
+  text-decoration: line-through;
+  color: var(--gray-300);
+}
+
+.checkIcon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+.trashIcon {
+  cursor: pointer;
+}
+

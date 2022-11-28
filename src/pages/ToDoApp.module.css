@@ -3,3 +3,9 @@
   width: 100%;
   max-width: 736px;
 }
+
+@media (max-width: 768px) {
+  .toDoContainer {
+    padding: 0 20px;
+  }
+}

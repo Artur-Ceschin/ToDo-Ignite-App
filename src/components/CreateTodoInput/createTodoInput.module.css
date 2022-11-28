@@ -37,7 +37,3 @@
   gap: 0.5rem;
 }
 
-.inputContainer > button:focus {
-  /* border:1px solid var(--blue-dark); */
-
-}

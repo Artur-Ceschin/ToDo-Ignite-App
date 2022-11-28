@@ -1,0 +1,15 @@
+.taskItensDefaultContainer {
+  text-align: center;
+  font-size: 16px;
+  color: var(--gray-300);
+}
+
+.taskItensDefaultContainer img {
+  margin-bottom: 1rem;
+}
+
+.taskItensDefaultContainer strong {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: bold;
+}

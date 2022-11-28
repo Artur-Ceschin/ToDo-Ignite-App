@@ -2,11 +2,15 @@ import { NumberDisplay } from '../NumberDisplay';
 
 import styles from './completedTasks.module.css';
 
-export function CompletedTasks() {
+interface completedTasksProps {
+  totalCompleted: number;
+}
+
+export function CompletedTasks({ totalCompleted = 0 }: completedTasksProps) {
   return (
     <div className={styles.completedTasksStyles}>
       <h3>Concluídas</h3>
-      <NumberDisplay number={0} />
+      <NumberDisplay number={totalCompleted} />
     </div>
   );
 }
