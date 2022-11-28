@@ -36,3 +36,7 @@ button {
   color:  var(--gray-100);
   border: none;
 }
+
+button {
+  cursor: pointer;
+}
