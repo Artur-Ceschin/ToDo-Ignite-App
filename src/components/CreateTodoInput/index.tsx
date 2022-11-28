@@ -35,7 +35,7 @@ export function CreateTodoInput({ tasks, setTasks }: createTodoInputProps) {
         onChange={(e) => setTaskInfo(e.target.value)}
         value={taskInfo}
       />
-      <button type='submit'>
+      <button type='submit' disabled={!taskInfo}>
         Criar <img src={plusIcon} alt='ícone de adição' />
       </button>
     </form>

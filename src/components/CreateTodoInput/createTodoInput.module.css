@@ -37,3 +37,11 @@
   gap: 0.5rem;
 }
 
+.inputContainer button:hover {
+  filter: brightness(0.8);
+}
+
+.inputContainer button:disabled {
+  cursor: not-allowed;
+  filter: brightness(0.8);
+}
