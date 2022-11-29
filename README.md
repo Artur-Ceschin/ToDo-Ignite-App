@@ -2,6 +2,8 @@
   <img alt="Logo" src="./public/todo-logo.svg" alt="ToDo - Ignite">
 </h1>
 
+![gif project](./public/todoapp-gif.gif)
+
 <img src="public/todo-gif.gif" width="250" height="250"/>
 
 <h1 align="center">
