@@ -1,5 +1,7 @@
+import { addDoc, collection } from 'firebase/firestore';
 import { Dispatch, FormEvent, SetStateAction, useState } from 'react';
-import { task } from 'src/pages/toDoApp';
+import { db } from 'src/config/firebase';
+import { task } from 'src/pages/ToDoApp';
 import { v4 as uuid } from 'uuid';
 import plusIcon from '../../assets/plus-icon.svg';
 
@@ -10,19 +12,16 @@ interface createTodoInputProps {
   setTasks: Dispatch<SetStateAction<task[]>>;
 }
 
-export function CreateTodoInput({ tasks, setTasks }: createTodoInputProps) {
+export function CreateTodoInput() {
   const [taskInfo, setTaskInfo] = useState('');
 
-  function handleCreateTask(e: FormEvent<HTMLFormElement>) {
+  async function handleCreateTask(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    const newTask = {
-      id: uuid(),
+    await addDoc(collection(db, 'todos'), {
       title: taskInfo,
-      isCompleted: false,
-    };
-
-    setTasks([...tasks, newTask]);
+      isCompleted: false
+    })
 
     setTaskInfo('');
   }

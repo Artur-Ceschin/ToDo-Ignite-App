@@ -1,6 +1,8 @@
+import { collection, deleteDoc, doc, getDocs, onSnapshot, query, QuerySnapshot, updateDoc } from 'firebase/firestore';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { NumberDisplay } from 'src/components/NumberDisplay';
-import { task } from 'src/pages/toDoApp';
+import { db } from 'src/config/firebase';
+import { task } from 'src/pages/ToDoApp';
 import { CompletedTasks } from '../CompletedTasks';
 import { DefaultTaskItens } from '../DefaultTaskItens';
 import { Task } from '../Task/Task';
@@ -11,30 +13,41 @@ interface taskContainerProps {
   setTasks: Dispatch<SetStateAction<task[]>>;
 }
 
-export function TaskContainer({ tasks, setTasks }: taskContainerProps) {
+export function TaskContainer() {
+  const [tasks, setTasks] = useState<task[]>([]);
   const [completedTasks, setCompletedTasks] = useState(0);
 
-  function handleDeleteTask(id: string) {
-    const removeTask = tasks.filter((item) => item.id !== id);
-
-    setTasks(removeTask);
+  async function handleDeleteTask(id: string) {
+    await deleteDoc(doc(db, 'todos', id))
   }
 
-  function handleCompleteTask(id: string) {
-    const completedItem = tasks.map((item) => {
-      if (item.id === id) {
-        item.isCompleted = !item.isCompleted;
-      }
-      return item;
-    });
+  async function handleCompleteTask(tasksValues: task) {
+    const taskId = tasksValues.id
 
-    setTasks(completedItem);
+    await updateDoc(doc(db, 'todos', taskId), {
+      isCompleted: !tasksValues.isCompleted
+    })
   }
 
   useEffect(() => {
     const completed = tasks.filter((task) => task.isCompleted).length;
     setCompletedTasks(completed);
   }, [tasks]);
+
+  useEffect(() => {
+    const queryCollection = query(collection(db, 'todos'))
+
+    const unsubscribe = onSnapshot(queryCollection, (querySnapshot) => {
+      let todosArr: Array<any> = []
+      querySnapshot.forEach(doc => {
+        todosArr.push({...doc.data(), id: doc.id})
+      })
+
+      setTasks(todosArr)
+    })
+
+    return () => unsubscribe()
+  }, [])
 
   return (
     <div className={styles.tasksContainer}>

@@ -1,3 +1,4 @@
+import { task } from 'src/pages/ToDoApp';
 import emptyCheck from '../../assets/empty-check.svg';
 import filledCheck from '../../assets/filled-check.svg';
 import trashIcon from '../../assets/trash-icon.svg';
@@ -8,7 +9,7 @@ interface taskProps {
   title: string;
   isCompleted: boolean;
   handleDeleteTask: (id: string) => void;
-  handleCompleteTask: (id: string) => void;
+  handleCompleteTask: (tasksValues: task) => void;
 }
 
 export function Task({
@@ -23,7 +24,7 @@ export function Task({
       <img
         src={isCompleted ? filledCheck : emptyCheck}
         alt='Check vazio'
-        onClick={() => handleCompleteTask(id)}
+        onClick={() => handleCompleteTask({id, title, isCompleted})}
         className={styles.checkIcon}
       />
       <div className={styles.textContainer}>
