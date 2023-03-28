@@ -9,7 +9,7 @@ interface completedTasksProps {
 export function CompletedTasks({ totalCompleted = 0 }: completedTasksProps) {
   return (
     <div className={styles.completedTasksStyles}>
-      <h3>Concluídas</h3>
+      <h3>Completed</h3>
       <NumberDisplay number={totalCompleted} />
     </div>
   );
