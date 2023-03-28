@@ -1,7 +1,8 @@
-import { collection, deleteDoc, doc, getDocs, onSnapshot, query, QuerySnapshot, updateDoc } from 'firebase/firestore';
+import { User } from 'firebase/auth';
+import { collection, deleteDoc, doc, onSnapshot, query, updateDoc } from 'firebase/firestore';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { NumberDisplay } from 'src/components/NumberDisplay';
-import { db } from 'src/config/firebase';
+import { auth, db } from 'src/config/firebase';
 import { task } from 'src/pages/ToDoApp';
 import { CompletedTasks } from '../CompletedTasks';
 import { DefaultTaskItens } from '../DefaultTaskItens';
@@ -13,9 +14,10 @@ interface taskContainerProps {
   setTasks: Dispatch<SetStateAction<task[]>>;
 }
 
-export function TaskContainer() {
+export function TaskContainer({user}: {user:User | null}) {
   const [tasks, setTasks] = useState<task[]>([]);
   const [completedTasks, setCompletedTasks] = useState(0);
+  
 
   async function handleDeleteTask(id: string) {
     await deleteDoc(doc(db, 'todos', id))
@@ -43,11 +45,19 @@ export function TaskContainer() {
         todosArr.push({...doc.data(), id: doc.id})
       })
 
-      setTasks(todosArr)
+      const tasksBasedOnUser = todosArr.filter((task) => task?.userId === user?.uid)
+
+      setTasks(tasksBasedOnUser)
     })
 
     return () => unsubscribe()
   }, [])
+
+  function signOut(){
+    if(auth.currentUser){
+      return auth.signOut()
+    }
+  }
 
   return (
     <div className={styles.tasksContainer}>
@@ -75,6 +85,8 @@ export function TaskContainer() {
       ) : (
         <DefaultTaskItens />
       )}
+
+      <button className={styles.signOutButton} onClick={signOut}>Sign out</button>
     </div>
   );
 }
