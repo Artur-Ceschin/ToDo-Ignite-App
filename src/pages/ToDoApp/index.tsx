@@ -11,7 +11,7 @@ import styles from './toDoApp.module.css';
 
 export interface task {
   id: string;
-  userId: string;
+  userId?: string;
   title: string;
   isCompleted: boolean;
 }
