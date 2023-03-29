@@ -1,5 +1,10 @@
 .loader {
-  margin: 15rem auto;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%; /* set the width of the div */
+  margin: 0 auto; /* center the div horizontally */
   
   border: 10px solid #f3f3f3;
   border-top: 10px solid var(--blue);

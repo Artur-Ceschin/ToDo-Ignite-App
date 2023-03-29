@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CreateTodoInput } from 'src/components/CreateTodoInput';
 import { Header } from 'src/components/Header';
@@ -17,25 +16,34 @@ export interface task {
 }
 
 export function ToDoApp() {
-  const [user, loading] = useAuthState(auth)
-  const navigate = useNavigate()
+  const [user, setUser] = useState(auth.currentUser);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
-  if(!user) {
-    navigate('/')
-    return null
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      setLoading(false);
+      if (user) {
+        setUser(user);
+      } else {
+        navigate('/');
+      }
+    });
+
+    return unsubscribe;
+  }, [navigate]);
+
+  if (loading) {
+    return <Spinner />;
   }
 
   return (
     <>
       <Header/>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <div className={styles.toDoContainer}>
-          <CreateTodoInput user={user}  />
-          <TaskContainer user={user}  />
-        </div>
-      )}
+      <div className={styles.toDoContainer}>
+        <CreateTodoInput user={user}  />
+        <TaskContainer user={user}  />
+      </div>
     </>
   );
 }

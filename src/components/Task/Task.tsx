@@ -5,11 +5,12 @@ import trashIcon from '../../assets/trash-icon.svg';
 import styles from './task.module.css';
 
 interface taskProps {
+  key: string;
   id: string;
   title: string;
   isCompleted: boolean;
-  handleDeleteTask: (id: string) => void;
-  handleCompleteTask: (tasksValues: task) => void;
+  handleDeleteTask: (id: string) => Promise<void>;
+  handleCompleteTask: (tasksValues: task) => Promise<void>;
 }
 
 export function Task({
