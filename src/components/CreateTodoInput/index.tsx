@@ -1,5 +1,5 @@
 import { User } from 'firebase/auth';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from 'src/config/firebase';
@@ -23,7 +23,8 @@ export function CreateTodoInput({user}: {user:User | null}) {
     await addDoc(collection(db, 'todos'), {
       userId: user?.uid,
       title: taskInfo,
-      isCompleted: false
+      isCompleted: false,
+      createdAt: serverTimestamp()
     })
 
     setTaskInfo('');

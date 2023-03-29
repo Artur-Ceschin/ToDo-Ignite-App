@@ -6,7 +6,7 @@ import { GoogleAuthProvider, signInWithPopup, User } from 'firebase/auth';
 import { auth } from 'src/config/firebase';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { addDoc, collection, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, getDocs, query, serverTimestamp, setDoc, where } from 'firebase/firestore';
 
 
 export function SignIn(){
@@ -30,7 +30,8 @@ export function SignIn(){
 
       await addDoc(collection(db, 'users'), {
         email: email,
-        name: displayName
+        name: displayName,
+        createdAt: serverTimestamp()
       })
 
       return navigate('/todos')

@@ -1,5 +1,5 @@
 import { User } from 'firebase/auth';
-import { collection, deleteDoc, doc, onSnapshot, query, updateDoc } from 'firebase/firestore';
+import { collection, deleteDoc, doc, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { NumberDisplay } from 'src/components/NumberDisplay';
 import { auth, db } from 'src/config/firebase';
@@ -37,7 +37,7 @@ export function TaskContainer({user}: {user:User | null}) {
   }, [tasks]);
 
   useEffect(() => {
-    const queryCollection = query(collection(db, 'todos'))
+    const queryCollection = query(collection(db, 'todos'), orderBy('createdAt', 'desc'))
 
     const unsubscribe = onSnapshot(queryCollection, (querySnapshot) => {
       let todosArr: Array<any> = []
