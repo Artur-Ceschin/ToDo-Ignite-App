@@ -5,8 +5,8 @@ export function DefaultTaskItens() {
   return (
     <div className={styles.taskItensDefaultContainer}>
       <img src={clipBoardImg} alt='Imagem Clipboard' />
-      <strong>Você ainda não tem tarefas cadastradas</strong>
-      <p>Crie tarefas e organize seus itens a fazer</p>
+      <strong>You still don't have any tasks</strong>
+      <p>Create tasks and organize your to-do items</p>
     </div>
   );
 }
